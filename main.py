@@ -23,6 +23,8 @@ def quit_app(icon=None, item=None):
     root.destroy()
 
 def setup_tray():
+    global tray
+
     image = Image.open(load_asset("icon.ico"))
 
     tray = Icon(
@@ -30,8 +32,15 @@ def setup_tray():
         image,
         "Keylock",
         menu=Menu(
-            MenuItem("Aç", show_window),
-            MenuItem("Çıkış", quit_app)
+            MenuItem(
+                "Open",
+                show_window,
+                default=True
+            ),
+            MenuItem(
+                "Quit",
+                quit_app
+            )
         )
     )
 
