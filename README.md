@@ -11,56 +11,54 @@
 <p align="center">
     <img src="./thumbnail.png" />
 </p>
-Keylock+ - Enhanced Keyboard & Mouse Locker
+Keylock+ 🔒
 
-Keylock+ is a lightweight Windows utility that lets you instantly lock your keyboard and mouse to prevent unwanted input. Designed for simplicity and convenience, it now supports automatic startup locking and system tray integration for a cleaner user experience.
+Lock your keyboard and mouse instantly, stay protected, and keep your desktop clutter-free.
+
+Keylock+ is a lightweight Windows utility designed to prevent unwanted keyboard and mouse input with a single click. Whether you're cleaning your peripherals, watching media, giving a presentation, or simply keeping curious pets away from your keyboard, Keylock+ provides a fast and reliable solution.
 
 Features
 
-✅ Lock keyboard, mouse, or both with a single click
- ✅ Custom unlock shortcuts (e.g. Ctrl+Q, Alt+X)
- ✅ Automatic locking on startup via configuration file
- ✅ Starts minimized to the system tray when startup locking is enabled
- ✅ Automatically hides to the system tray after activating any lock
- ✅ Restore the main window anytime from the tray icon
- ✅ Lightweight and resource-friendly
- ✅ Portable executable support
- ✅ TOML-based configuration system
+✅ Lock keyboard only
+ ✅ Lock mouse only
+ ✅ Lock both keyboard and mouse simultaneously
+ ✅ Custom unlock shortcuts (Ctrl+Q, Alt+X, etc.)
+ ✅ Automatic locking on startup
+ ✅ Starts hidden in the system tray when startup locking is enabled
+ ✅ Automatically minimizes to the system tray after activating a lock
+ ✅ Restore the main window directly from the tray icon
+ ✅ Lightweight and portable
+ ✅ TOML-based configuration support
+ ✅ No installation required
 
-Startup Configuration
+Smart System Tray Integration
+
+Keylock+ runs quietly in the background and stays out of your way.
+
+Startup locks can launch without displaying the main window.
+The application can minimize directly to the system tray.
+Click the tray icon to reopen the interface.
+Close the application completely using the tray menu.
+Configuration Example
 [startup]
 lock_keyboard = true
 lock_mouse = true
 
 
-When either startup option is enabled:
+With these settings enabled, Keylock+ starts automatically in the background, activates the selected locks, and remains accessible through the system tray.
 
-Keylock+ launches silently in the background
-The main window remains hidden
-A system tray icon is created automatically
-Keyboard and mouse locks are activated according to your settings
-System Tray Integration
+Perfect For
+Pet-proofing your keyboard
+Preventing accidental clicks during presentations
+Temporarily disabling input devices while cleaning
+Media playback and streaming
+Shared computers and kiosks
+Child-safe desktop environments
+Built for Simplicity
 
-The system tray menu provides:
+Keylock+ focuses on doing one thing well: giving you instant control over your input devices without unnecessary complexity. Fast, lightweight, and easy to use.
 
-Open → Restore the main window
-Exit → Close Keylock completely
-
-The application automatically minimizes to the tray when:
-
-Startup locking is enabled
-Keyboard lock is activated
-Mouse lock is activated
-Both locks are activated
-The window close button is pressed
-Ideal Use Cases
-Keeping pets from pressing keys
-Preventing accidental clicks during downloads or presentations
-Temporarily disabling input devices while cleaning hardware
-Shared computers and kiosk-style environments
-Streaming, media playback, or unattended workstations
-
-Keylock+: Lock your input devices instantly, stay protected, and keep your desktop clutter-free.
+Keylock+ — One click. Zero interruptions. 🔒🖱️⌨️
 ## 🎛️ Config File
 
 You can make a file called `keylock.toml` in the directory where the executable is. It will be used by the app to load the settings. All config options are:
