@@ -5,9 +5,52 @@ import threading
 import tkinter as tk
 from core import lock_keyboard, lock_mouse
 from settings import open_config, save_config
+from pystray import Icon, Menu, MenuItem
+from PIL import Image
+import threading
 
 config = open_config()
 refresh_rate = 1500
+
+def show_window(icon=None, item=None):
+    root.after(0, root.deiconify)
+
+def hide_window():
+    root.withdraw()
+
+def quit_app(icon=None, item=None):
+    icon.stop()
+    root.destroy()
+
+def setup_tray():
+    image = Image.open(load_asset("icon.ico"))
+
+    tray = Icon(
+        "keylock",
+        image,
+        "Keylock",
+        menu=Menu(
+            MenuItem("Aç", show_window),
+            MenuItem("Çıkış", quit_app)
+        )
+    )
+
+    tray.run()
+
+def lock_all_and_hide():
+    lock_keyboard(shortcut.get())
+    lock_mouse(shortcut.get())
+    root.after(100, root.withdraw)
+
+def lock_keyboard_and_hide():
+    lock_keyboard(shortcut.get())
+    update_keyboard()
+    root.after(100, root.withdraw)
+
+def lock_mouse_and_hide():
+    lock_mouse(shortcut.get())
+    update_mouse()
+    root.after(100, root.withdraw)
 
 if os.name == "nt":
     try:
@@ -25,6 +68,11 @@ def load_asset(path):
 
 
 root = tk.Tk()
+if (
+    config["startup"]["lock_keyboard"]
+    or config["startup"]["lock_mouse"]
+):
+    root.withdraw()
 root.geometry("360x352")
 root.configure(bg="#ffffff")
 root.title("Keylock")
@@ -120,7 +168,7 @@ button_1 = tk.Button(
     relief="flat",
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: (lock_keyboard(shortcut.get()), lock_mouse(shortcut.get())),
+    command=lock_all_and_hide,
 )
 button_1.place(x=23, y=240, width=315, height=39)
 
@@ -130,7 +178,7 @@ button_2 = tk.Button(
     relief="flat",
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: (lock_keyboard(shortcut.get()), update_keyboard()),
+    command=lock_keyboard_and_hide,
 )
 button_2.place(x=24, y=176, width=144, height=39)
 
@@ -140,9 +188,19 @@ button_3 = tk.Button(
     relief="flat",
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: (lock_mouse(shortcut.get()), update_mouse()),
+    command=lock_mouse_and_hide,
 )
 button_3.place(x=194, y=176, width=144, height=39)
 
+
 root.resizable(False, False)
+def on_close():
+    root.withdraw()
+
+root.protocol("WM_DELETE_WINDOW", on_close)
+
+threading.Thread(
+    target=setup_tray,
+    daemon=True
+).start()
 root.mainloop()
